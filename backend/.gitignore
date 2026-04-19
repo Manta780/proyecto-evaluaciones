@@ -1,0 +1,14 @@
+.env 
+__pycache__/ 
+venv/ 
+
+# Entorno virtual
+venv/
+__pycache__/
+.env.example
+
+# Variables de entorno (¡MUY IMPORTANTE!)
+.env
+
+# Archivos de sistema
+.DS_Store
