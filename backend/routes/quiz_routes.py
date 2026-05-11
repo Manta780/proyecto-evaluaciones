@@ -1,5 +1,7 @@
-from fastapi import APIRouter, UploadFile, File, Form
+from fastapi import APIRouter, UploadFile, File, Form, Depends, Header
+from sqlalchemy.orm import Session
 from controllers.quiz_controller import generar_quiz
+from database import get_db
 
 router = APIRouter(prefix="/quiz", tags=["Quiz"])
 
@@ -8,13 +10,18 @@ async def generar(
     archivo: UploadFile = File(...),
     cantidad: int = Form(5),
     dificultad: str = Form("Comprensión"),
-    tipo: str = Form("opción múltiple")
+    tipo: str = Form("opción múltiple"),
+    modo_limpieza: str = Form("completa"),
+    title: str = Form(None),
+    description: str = Form(None),
+    authorization: str = Header(None),
+    db: Session = Depends(get_db)
 ):
-    # Creamos un diccionario con la configuración
     config = {
         "cantidad": cantidad,
         "dificultad": dificultad,
-        "tipo": tipo
+        "tipo": tipo,
+        "title": title,
+        "description": description
     }
-    # Pasamos el archivo y la configuración al controlador
-    return await generar_quiz(archivo, config)
+    return await generar_quiz(archivo, config, modo_limpieza=modo_limpieza, authorization=authorization, db=db)

@@ -1,14 +1,19 @@
-.env 
-__pycache__/ 
-venv/ 
-
-# Entorno virtual
+# Environment
+.env
+.env.example
 venv/
 __pycache__/
-.env.example
 
-# Variables de entorno (¡MUY IMPORTANTE!)
-.env
-
-# Archivos de sistema
+# System
 .DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Firebase credentials (sensitive)
+quizesai-dcb20-firebase-adminsdk-fbsvc-ed1f0333de.json
+*firebase-adminsdk*.json
